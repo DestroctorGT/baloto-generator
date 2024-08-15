@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { decrypt } from './app/proxy/cookies'
+import { decrypt } from './proxy/cookies'
+import { protectedRoutes } from './constants'
+import { ROUTES } from './constants/routes'
 
-// This function can be marked `async` if using `await` inside
 export async function middleware (request: NextRequest): Promise<NextResponse<unknown>> {
-  const protectedRoutes = ['/home']
   const currentPath = request.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(currentPath)
 
@@ -16,15 +16,16 @@ export async function middleware (request: NextRequest): Promise<NextResponse<un
       const session = await decrypt(cookie)
 
       if (session == null) {
-        return NextResponse.redirect(new URL('/login', request.nextUrl))
+        return NextResponse.redirect(new URL(ROUTES.LOGIN, request.nextUrl))
       }
+    } else {
+      return NextResponse.redirect(new URL(ROUTES.LOGIN, request.nextUrl))
     }
   }
 
   return NextResponse.next()
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/about/:path*'
+  matcher: ['/favorites']
 }
