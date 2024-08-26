@@ -27,5 +27,5 @@ export async function middleware (request: NextRequest): Promise<NextResponse<un
 }
 
 export const config = {
-  matcher: ['/favorites']
+  matcher: ['/', '/favorites']
 }

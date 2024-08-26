@@ -1,12 +1,12 @@
 export enum ApiAuth {
-  ApiAuth = '/auth',
-  ApiLogIn = '/login',
-  ApiSignIn = '/signIn',
-  ApiLogOut = '/logOut'
+  ApiAuth = 'auth',
+  ApiLogIn = 'login',
+  ApiSignIn = 'signIn',
+  ApiLogOut = 'logOut'
 }
 
 export enum ApiBaloto {
-  ApiBaloto = '/baloto',
+  ApiBaloto = 'baloto',
   ApiLastBalotoResults = '/last-baloto-results',
   ApiLastBalotoResultsRematch = '/last-baloto-rematch-results',
   ApiLastMiLotoResults = '/last-miloto-results',
