@@ -1,7 +1,7 @@
 import { ApiAuth } from '@/enums/api'
 import { post } from '@/proxy/verbs'
 
-export const signIn = async (): Promise<{
+export const signOut = async (): Promise<{
   isSuccessful: string
 } | undefined> => {
   const { data } = await post<string>(`${ApiAuth.ApiAuth}${ApiAuth.ApiLogOut}`)

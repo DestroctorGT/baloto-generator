@@ -4,11 +4,13 @@ import { JWTPayload, jwtVerify, JWTVerifyResult } from 'jose'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-const JWT_SECRET = new TextEncoder().encode(process.env.SECRET_JWT_KEY)
+const JWT_SECRET = process.env.SECRET_JWT_KEY ?? ''
 
 export async function decrypt (token: string): Promise<JWTVerifyResult<JWTPayload> | null> {
   try {
-    const payload = await jwtVerify(token, JWT_SECRET)
+    const payload = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET), {
+      algorithms: ['HS256']
+    })
 
     return payload
   } catch (error) {

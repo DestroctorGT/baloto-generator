@@ -1,8 +1,8 @@
 export enum ApiAuth {
   ApiAuth = 'auth',
-  ApiLogIn = 'login',
-  ApiSignIn = 'signIn',
-  ApiLogOut = 'logOut'
+  ApiLogIn = '/login',
+  ApiSignIn = '/signIn',
+  ApiLogOut = '/logOut'
 }
 
 export enum ApiBaloto {

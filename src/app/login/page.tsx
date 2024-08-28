@@ -10,12 +10,14 @@ import { logIn } from '@/rest-client/endpoints/auth/log-in'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/constants/routes'
 import { SignInSchema } from '@/formik-schemas/sign-in-schema'
+import { useAuthenticated } from '@/contexts/authenticated'
 
 const initialValues: SignIn = { email: '', password: '' }
 
 export default function Login (): JSX.Element {
   const { showLoader, hideLoader } = useLoader()
   const router = useRouter()
+  const { setIsAuthenticated } = useAuthenticated()
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-6'>
@@ -29,6 +31,7 @@ export default function Login (): JSX.Element {
           hideLoader()
 
           if (response?.isSuccessful !== null) {
+            setIsAuthenticated(true)
             router.push(ROUTES.HOME)
           }
         }}
