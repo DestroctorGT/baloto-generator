@@ -62,7 +62,9 @@ export function NavBar (): JSX.Element {
 
   return (
     <ul className='flex flex-row items-center justify-between pt-3 px-3 py-1 bg-primary-400 lg:py-3'>
-      <li><span>Generador de baloto</span></li>
+      <li>
+        <Link href={ROUTES.HOME} className='hover:text-neutrals-white transition duration-100 ease-in-out'>Generador de baloto</Link>
+      </li>
       <li className='lg:hidden'><HamburgerMenu /></li>
       <li className='hidden lg:block'>
         <div className='flex flex-row items-center justify-center gap-8'>

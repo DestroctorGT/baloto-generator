@@ -3,15 +3,17 @@
 import Button from '@/components/shareds/button'
 import Input from '@/components/shareds/input'
 import { useLoader } from '@/contexts/loader'
+import { ClipBoardTypes } from '@/enums/clip-board-types'
 import { generatePossibleBalotoNumber } from '@/rest-client/endpoints/baloto/generate-possible-baloto-number'
 import { generatePossibleMilotoNumber } from '@/rest-client/endpoints/baloto/generate-possible-miloto-number'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { Copy } from 'iconoir-react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 export default function Home (): JSX.Element {
-  const [balotoNumber, setBalotoNumber] = useState<number | undefined>()
-  const [milotoNumber, setMilotoNumber] = useState<number | undefined>()
+  const [balotoNumber, setBalotoNumber] = useState<string | undefined>()
+  const [milotoNumber, setMilotoNumber] = useState<string | undefined>()
   const { showLoader, hideLoader } = useLoader()
 
   const generateBalotoNumber = async (): Promise<void> => {
@@ -20,7 +22,7 @@ export default function Home (): JSX.Element {
     hideLoader()
 
     if (response != null) {
-      const newBalotoNumber = Number(response.possibleNumber.join('') + response.superBalota.toString())
+      const newBalotoNumber = `${response.possibleNumber.join('  ')} - ${response.superBalota}`
 
       setBalotoNumber(newBalotoNumber)
     }
@@ -32,11 +34,34 @@ export default function Home (): JSX.Element {
     hideLoader()
 
     if (response != null) {
-      const newMilotoNumber = Number(response.join(''))
+      const newMilotoNumber = response.join('  ')
 
       setMilotoNumber(newMilotoNumber)
     }
   }
+
+  const handleCopyToClipboard = (option: ClipBoardTypes): void => {
+    if (option === ClipBoardTypes.BALOTO && balotoNumber !== undefined) {
+      navigator.clipboard.writeText(balotoNumber)
+        .then(() => {
+          toast.success('Numero copiado al portapapeles')
+        })
+        .catch(err => {
+          toast.error('Hubo un error al copiar el numero')
+          return err
+        })
+    } else if (option === ClipBoardTypes.MILOTO && milotoNumber !== undefined) {
+      navigator.clipboard.writeText(milotoNumber)
+        .then(() => {
+          toast.success('Numero copiado al portapapeles')
+        })
+        .catch(err => {
+          toast.error('Hubo un error al copiar el numero')
+          return err
+        })
+    }
+  }
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-6'>
       <section className='flex flex-col items-center justify-center gap-4'>
@@ -49,7 +74,7 @@ export default function Home (): JSX.Element {
             <TabPanel className='flex flex-col items-center justify-center gap-6'>
               <div className='flex flex-row gap-3'>
                 <Input props={{ disabled: true, id: 'baloto', name: 'baloto', className: 'text-center', value: balotoNumber }} />
-                <button type='button'>
+                <button type='button' onClick={() => handleCopyToClipboard(ClipBoardTypes.BALOTO)}>
                   <Copy />
                 </button>
               </div>
@@ -64,7 +89,7 @@ export default function Home (): JSX.Element {
             <TabPanel className='flex flex-col items-center justify-center gap-6'>
               <div className='flex flex-row gap-3'>
                 <Input props={{ className: 'text-center', disabled: true, value: milotoNumber, id: 'miloto', name: 'miloto' }} />
-                <button type='button'>
+                <button type='button' onClick={() => handleCopyToClipboard(ClipBoardTypes.MILOTO)}>
                   <Copy />
                 </button>
               </div> <Button
