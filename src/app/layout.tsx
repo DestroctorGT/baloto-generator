@@ -29,7 +29,7 @@ export default function RootLayout ({
             <ToasterWrap />
             <NavBar />
             {children}
-            <footer className='flex flex-row items-center justify-center pb-2'>
+            <footer className='flex flex-row items-center justify-center pb-2 text-neutrals-black'>
               Made with ❤️ by Giba Dev
             </footer>
           </LoaderProvider>

@@ -61,7 +61,7 @@ export function NavBar (): JSX.Element {
   }
 
   return (
-    <ul className='flex flex-row items-center justify-between pt-3 px-3 py-1 bg-primary-400 lg:py-3'>
+    <ul className='flex flex-row items-center justify-between pt-3 px-3 py-1 text-neutrals-black bg-primary-400 lg:py-3'>
       <li>
         <Link href={ROUTES.HOME} className='hover:text-neutrals-white transition duration-100 ease-in-out'>Generador de baloto</Link>
       </li>
