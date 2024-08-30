@@ -16,8 +16,8 @@ export default function HamburgerMenu (): JSX.Element {
   const currentPathname = usePathname()
   const router = useRouter()
 
-  const getClassName = (isActive: boolean): 'px-1 rounded bg-secondary-400 text-neutrals-white' | '' =>
-    isActive ? 'px-1 rounded bg-secondary-400 text-neutrals-white' : ''
+  const getClassName = (isActive: boolean): 'px-1 rounded bg-secondary-400 text-neutrals-white' | 'text-neutrals-black' =>
+    isActive ? 'px-1 rounded bg-secondary-400 text-neutrals-white' : 'text-neutrals-black'
 
   const handleLogOut = async (): Promise<void> => {
     await signOut()
@@ -30,7 +30,7 @@ export default function HamburgerMenu (): JSX.Element {
 
   const renderButton = (link: MenuMobileLinksProps): JSX.Element =>
     <button
-      className='text-start hover:text-neutrals-white transition duration-100 ease-in-out'
+      className='text-start text-neutrals-black hover:text-neutrals-white transition duration-100 ease-in-out'
       type='button' onClick={() => {
         if (link.label === 'Cerrar sesión') {
           void handleLogOut()
