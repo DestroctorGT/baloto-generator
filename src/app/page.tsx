@@ -67,19 +67,20 @@ export default function Home (): JSX.Element {
       <section className='flex flex-col items-center justify-center gap-4'>
         <TabGroup className='bg-secondary-300 p-10 rounded shadow-md'>
           <TabList className='flex flex-row gap-3 mb-10'>
-            <Tab className='rounded py-1 px-3 data-[selected]:bg-primary-500'>Baloto</Tab>
-            <Tab className='rounded py-1 px-3 data-[selected]:bg-primary-500'>Miloto</Tab>
+            <Tab className='rounded py-1 px-3 data-[selected]:bg-primary-500 text-neutrals-black'>Baloto</Tab>
+            <Tab className='rounded py-1 px-3 data-[selected]:bg-primary-500 text-neutrals-black'>Miloto</Tab>
           </TabList>
           <TabPanels>
             <TabPanel className='flex flex-col items-center justify-center gap-6'>
               <div className='flex flex-row gap-3'>
-                <Input props={{ disabled: true, id: 'baloto', name: 'baloto', className: 'text-center', value: balotoNumber }} />
+                <Input props={{ disabled: true, id: 'baloto', name: 'baloto', className: 'text-center text-neutrals-black', value: balotoNumber }} />
                 <button type='button' onClick={() => handleCopyToClipboard(ClipBoardTypes.BALOTO)}>
-                  <Copy />
+                  <Copy className='text-neutrals-black' />
                 </button>
               </div>
               <Button
                 props={{
+                  className: 'text-neutrals-black',
                   onClick: () => {
                     void generateBalotoNumber()
                   }
@@ -88,17 +89,19 @@ export default function Home (): JSX.Element {
             </TabPanel>
             <TabPanel className='flex flex-col items-center justify-center gap-6'>
               <div className='flex flex-row gap-3'>
-                <Input props={{ className: 'text-center', disabled: true, value: milotoNumber, id: 'miloto', name: 'miloto' }} />
+                <Input props={{ className: 'text-center text-neutrals-black', disabled: true, value: milotoNumber, id: 'miloto', name: 'miloto' }} />
                 <button type='button' onClick={() => handleCopyToClipboard(ClipBoardTypes.MILOTO)}>
-                  <Copy />
+                  <Copy className='text-neutrals-black' />
                 </button>
-              </div> <Button
+              </div>
+              <Button
                 props={{
+                  className: 'text-neutrals-black',
                   onClick: () => {
                     void generateMilotoNumber()
                   }
                 }} label='Generar'
-                     />
+              />
             </TabPanel>
           </TabPanels>
         </TabGroup>
