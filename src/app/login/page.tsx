@@ -30,7 +30,7 @@ export default function Login (): JSX.Element {
           setSubmitting(false)
           hideLoader()
 
-          if (response?.isSuccessful !== null) {
+          if (response !== null) {
             setIsAuthenticated(true)
             router.push(ROUTES.HOME)
           }

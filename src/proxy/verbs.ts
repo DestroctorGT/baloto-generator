@@ -21,8 +21,7 @@ const createConfigurations = async <Data>(url: string, params: Record<string, un
     headers: {
       ...newHeaders
     },
-    data: body,
-    withCredentials: true
+    data: body
   }
 }
 

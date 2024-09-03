@@ -29,7 +29,7 @@ export default function Register (): JSX.Element {
           setSubmitting(false)
           hideLoader()
 
-          if (response?.isSuccessful !== null) {
+          if (response !== null) {
             router.push(ROUTES.HOME)
           }
         }}
