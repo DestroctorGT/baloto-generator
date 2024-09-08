@@ -105,6 +105,10 @@ export default function Home (): JSX.Element {
             </TabPanel>
           </TabPanels>
         </TabGroup>
+
+        <span className='text-sm text-neutrals-black'>
+          * El último sorteo se guarda a las 10:00 a.m. *
+        </span>
       </section>
     </main>
   )
